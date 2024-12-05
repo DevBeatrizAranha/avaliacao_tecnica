@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Hx17rakxlSc=",
+  "dgSpecHash": "VkSO79hR59I=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Beatriz\\Desktop\\teste_confitec\\UserManagementApi\\UserManagementApi.csproj",
+  "projectFilePath": "C:\\Users\\Beatriz\\projects\\avaliacao_tecnica\\USER_MANAGEMENT\\UserManagementApi\\UserManagementApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Beatriz\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Beatriz\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

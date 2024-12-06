@@ -63,4 +63,9 @@ export class UserService {
     const url = `${this.apiUrl}/${id}`;
     return this.http.get<User>(url);
   }
+
+  searchUsers(searchTerm: string): Observable<any> {
+    const params = new HttpParams().set('name', searchTerm);  
+    return this.http.get<any>(this.apiUrl, { params });
+  }
 }

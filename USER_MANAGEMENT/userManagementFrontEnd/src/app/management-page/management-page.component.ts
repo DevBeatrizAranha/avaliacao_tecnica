@@ -16,6 +16,8 @@ import * as bootstrap from 'bootstrap';
 })
 export class ManagementPageComponent {
 
+  searchTerm: string = '';
+
   openModal() {
     const modalElement = document.getElementById('userModal');
     const modal = new bootstrap.Modal(modalElement!);

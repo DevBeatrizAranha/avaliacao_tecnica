@@ -1,17 +1,14 @@
 <app-header></app-header>
-<div class="row mt-5">
-  <div class="col" style="display: flex;">
-    <input type="text" class="form-control mx-5" placeholder="Pesquisar...">
-    <button class="btn btn-primary mx-5" (click)="openModal()"> Novo </button>
-  </div>
-</div>
 
 <div class="row mt-3">
   <div class="col">
-    <div class="card  mx-5">
+   
+    <div class="card mx-5">
+      <div class="col mx-3 mt-4 btn-direita">
+        <button type="button" class="btn btn-success " (click)="openModal()"> Novo usuário</button>
+      </div>
       <app-user-list></app-user-list>
     </div>
-
   </div>
 </div>
 

@@ -1,8 +1,19 @@
 <div *ngIf="isLoading">Carregando...</div>
 <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
 
+<div class="row mt-3">
+  <div class="col" style="display: flex;">
+    <input 
+      type="text" 
+      class="form-control mx-3" 
+      placeholder="Pesquisar pelo nome..."
+      [(ngModel)]="searchTerm" 
+      (ngModelChange)="searchUsers()">  
+  </div>
+</div>
 
-<table *ngIf="!isLoading" class="table table-striped">
+
+<table *ngIf="!isLoading" class="table table-striped mt-4">
   <thead>
     <tr>
       <th>ID</th>
@@ -15,9 +26,9 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let user of users">
+    <tr *ngFor="let user of usersFiltered">
       <td>{{ user.id }}</td>
-      <td>{{ user.name }}</td>
+      <td >{{ user.name }}</td>
       <td>{{ user.lastName }}</td>
       <td>{{ user.email }}</td>
       <td>{{ user.dateOfBirth}}</td>

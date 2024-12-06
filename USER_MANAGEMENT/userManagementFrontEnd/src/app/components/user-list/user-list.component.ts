@@ -22,6 +22,9 @@ export class UserListComponent implements OnInit {
 
   @ViewChild(FormComponent) formComponent!: FormComponent;
   @Output() dataEmitter = new EventEmitter<any>();
+  searchTerm: any;
+  usersFiltered!: User[];
+  
 
   constructor(private userService: UserService, private dataService: DataService) {}
 
@@ -34,6 +37,8 @@ export class UserListComponent implements OnInit {
     this.userService.getUsers().subscribe({
       next: (users) => {
         this.users = users;
+        this.usersFiltered = users; 
+        this.users = this.usersFiltered;
         this.isLoading = false;
       },
       error: (err) => {
@@ -42,6 +47,26 @@ export class UserListComponent implements OnInit {
       }
     });
   }
+
+  searchUsers(): void {
+    if (this.searchTerm.trim() === '') {
+      this.usersFiltered = this.users;  
+      return;
+    }
+
+    this.isLoading = true;
+    this.userService.searchUsers(this.searchTerm).subscribe({
+      next: (filteredUsers) => {
+        this.usersFiltered = filteredUsers;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.errorMessage = 'Erro ao buscar os usuários.';
+        this.isLoading = false;
+      }
+    });
+  }
+
 
   sendData() {
     this.dataService.setData(this.selectedUser);

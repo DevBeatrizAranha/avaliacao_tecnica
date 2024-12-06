@@ -36,8 +36,8 @@ namespace UserManagementApi.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Education")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Education")
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Email")
                         .IsRequired()

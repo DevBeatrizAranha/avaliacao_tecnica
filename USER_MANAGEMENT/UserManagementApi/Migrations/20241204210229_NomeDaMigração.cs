@@ -21,7 +21,7 @@ namespace UserManagementApi.Migrations
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Education = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Education = table.Column<string>(type: "nvarchar(50)", nullable: false),
                 },
                 constraints: table =>
                 {

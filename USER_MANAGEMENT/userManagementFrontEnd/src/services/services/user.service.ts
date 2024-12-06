@@ -1,16 +1,41 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+interface User {
+  id: number;
+  name: string;
+  lastName: string;
+  email: string;
+  dateOfBirth: string;
+  education: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  SERVER_URL = 'https://localhost:3000';
+  private apiUrl = `${environment.apiUrl}/users`; // URL API
 
   constructor(private http: HttpClient) { }
 
-  public getUsers() {
-    return this.http.get(`${this.SERVER_URL}/user`)
+  getUsers(name?: string, dateOfBirth?: string, email?: string, education?: string): Observable<User[]> {
+    let params = new HttpParams();
+
+    if (name) {
+      params = params.set('name', name);
+    }
+    if (dateOfBirth) {
+      params = params.set('dateOfBirth', dateOfBirth);
+    }
+    if (email) {
+      params = params.set('email', email);
+    }
+    if (education) {
+      params = params.set('education', education);
+    }
+
+    return this.http.get<User[]>(this.apiUrl, { params });
   }
 }

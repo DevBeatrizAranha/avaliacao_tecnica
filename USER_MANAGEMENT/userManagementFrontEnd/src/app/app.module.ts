@@ -3,13 +3,23 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http'; 
 
+
+import { UserService } from '../services/services/user.service';
+
+
+import { CommonModule } from '@angular/common';  
+
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule  
+    HttpClientModule,
+   
+    UserService,
+    CommonModule
+   
   ],
   providers: [],
   bootstrap: [AppComponent]

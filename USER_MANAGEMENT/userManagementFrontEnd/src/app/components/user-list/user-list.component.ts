@@ -57,6 +57,7 @@ export class UserListComponent implements OnInit {
       },
       error: (err) => {
         console.error('Erro ao carregar o usuário para edição:', err);
+        alert('Erro ao carregar o usuário para edição');
       }
 
 
@@ -74,9 +75,8 @@ export class UserListComponent implements OnInit {
     if (this.selectedUser) {
       this.userService.updateUser(this.selectedUser.id, this.selectedUser).subscribe({
         next: () => {
-          console.log('Usuário atualizado com sucesso!');
+          console.log('Usuário atualizado com sucesso!2');
           this.loadUsers(); 
-
           const modalElement = document.getElementById('userModal');
           if (modalElement) {
             const modal = new bootstrap.Modal(modalElement);
@@ -85,9 +85,11 @@ export class UserListComponent implements OnInit {
         },
         error: (err) => {
           console.error('Erro ao atualizar o usuário:', err);
+          alert('Erro ao atualizar o usuário');
         }
       });
     }
+     
   }
 
 
@@ -95,11 +97,12 @@ export class UserListComponent implements OnInit {
     if (confirm('Você tem certeza que deseja excluir este usuário?')) {
       this.userService.deleteUser(id).subscribe({
         next: () => {
-          console.log('Usuário excluído com sucesso!');
+          alert('Usuário excluído com sucesso!');
           this.loadUsers();
         },
         error: (err) => {
           console.error('Erro ao excluir o usuário:', err);
+          alert('Erro ao excluir o usuário');
         }
       });
     }

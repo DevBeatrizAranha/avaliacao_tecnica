@@ -4,6 +4,7 @@ import { User } from '../../models/user.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; 
 import { DataService } from '../../services/component.service';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-form',
@@ -37,7 +38,7 @@ export class FormComponent {
         this.addUser();
       }
     } else {
-      console.log('Preencha todos os campos obrigatórios');
+      alert('Preencha todos os campos obrigatórios');
     }
   }
 
@@ -45,11 +46,13 @@ export class FormComponent {
   
     this.userService.addUser(this.user).subscribe({
       next: (response: any) => {
-        console.log('Usuário adicionado com sucesso!', response);
+        alert('Usuário adicionado com sucesso!');
         this.userAdded.emit(response);  
       },
       error: (err: any) => {
         console.error('Erro ao adicionar o usuário', err);
+        alert('Erro ao excluir o usuário:');
+
       }
     });
   }
@@ -58,12 +61,15 @@ export class FormComponent {
     this.userService.updateUser(this.user.id, this.user).subscribe({
       next: (response: any) => {
         console.log('Usuário atualizado com sucesso!', response);
+        alert('Usuário atualizado com sucesso!');
         this.userUpdated.emit(response); 
+   
       },
       error: (err: any) => {
         console.error('Erro ao atualizar o usuário', err);
       }
     });
+    
   }
 
   ngOnInit(): void {

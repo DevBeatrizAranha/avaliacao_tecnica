@@ -10,6 +10,7 @@
       <th>Email</th>
       <th>Data de Nascimento</th>
       <th>Escolaridade</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -20,7 +21,10 @@
       <td>{{ user.email }}</td>
       <td>{{ user.dateOfBirth}}</td>
       <td>{{ user.education }}</td>
+      <td style="display:flex; justify-content: flex-end">
+        <button (click)="editUser(user)" class="btn btn-primary btn-sm mx-2">Editar</button>
+        <button (click)="deleteUser(user.id)" class="btn btn-danger btn-sm mx-2">Excluir</button>
+      </td>
     </tr>
   </tbody>
 </table> 
-<h1>working</h1>

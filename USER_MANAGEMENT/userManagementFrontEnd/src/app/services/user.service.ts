@@ -39,4 +39,12 @@ export class UserService {
 
     return this.http.get<User[]>(this.apiUrl, { params });
   }
+
+  deleteUser(userId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${userId}`);
+  }
+
+  addUser(user: any): Observable<any> {
+    return this.http.post(this.apiUrl, user);
+  }
 }

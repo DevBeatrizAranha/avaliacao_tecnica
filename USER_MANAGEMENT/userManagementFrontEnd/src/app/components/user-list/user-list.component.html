@@ -7,7 +7,7 @@
       <th>ID</th>
       <th>Nome</th>
       <th>Sobrenome</th>
-      <th>email</th>
+      <th>Email</th>
       <th>Data de Nascimento</th>
       <th>Escolaridade</th>
       <th></th>
@@ -22,7 +22,7 @@
       <td>{{ user.dateOfBirth}}</td>
       <td>{{ user.education }}</td>
       <td style="display:flex; justify-content: flex-end">
-        <button (click)="selectUserToEdit(user.id)" class="btn btn-primary btn-sm mx-2">Editar</button>
+        <button class="btn btn-primary" (click)="openModal(user)">Editar Usuário</button>
         <button (click)="deleteUser(user.id)" class="btn btn-danger btn-sm mx-2">Excluir</button>
       </td>
     </tr>

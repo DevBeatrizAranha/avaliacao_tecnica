@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user.model';
 import { FormComponent } from '../form/form.component';
@@ -14,10 +14,13 @@ import * as bootstrap from 'bootstrap';
 })
 export class UserListComponent implements OnInit {
   users: User[] = [];
-  selectedUser: User | null = null; // Usuário selecionado para editar
+  selectedUser: User | null = null; 
   isEditMode: boolean = false;
   errorMessage: string | null = null;
   isLoading: boolean = false;
+
+  @ViewChild(FormComponent) formComponent!: FormComponent;
+  @Input() user!: User;
 
   constructor(private userService: UserService) {}
 
@@ -45,7 +48,7 @@ export class UserListComponent implements OnInit {
         this.selectedUser = userData;
         this.isEditMode = true;
         
-        // Use Bootstrap Modal API to show the modal
+    
         const modalElement = document.getElementById('userModal');
         if (modalElement) {
           const modal = new bootstrap.Modal(modalElement);
@@ -65,7 +68,6 @@ export class UserListComponent implements OnInit {
           console.log('Usuário atualizado com sucesso!');
           this.loadUsers(); 
 
-          // Hide the modal after update
           const modalElement = document.getElementById('userModal');
           if (modalElement) {
             const modal = new bootstrap.Modal(modalElement);
@@ -76,6 +78,15 @@ export class UserListComponent implements OnInit {
           console.error('Erro ao atualizar o usuário:', err);
         }
       });
+    }
+  }
+
+  openModal(user: User): void {
+    this.selectedUser = { ...user }; // Evita alterar diretamente o objeto original.
+    const modalElement = document.getElementById('userModal');
+    if (modalElement) {
+      const modal = new bootstrap.Modal(modalElement);
+      modal.show();
     }
   }
 

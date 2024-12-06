@@ -51,7 +51,7 @@ export class UserService {
   }
 
   updateUser(id: number, user: User): Observable<void> {
-    const url = `${this.apiUrl}/Users/${id}`;
+    const url = `${this.apiUrl}/${id}`;
     return this.http.put<void>(url, user, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'

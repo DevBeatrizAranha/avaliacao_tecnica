@@ -1,9 +1,10 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user.model';
 import { FormComponent } from '../form/form.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; 
+import { DataService } from '../../services/component.service';
 import * as bootstrap from 'bootstrap';
 
 @Component({
@@ -20,9 +21,9 @@ export class UserListComponent implements OnInit {
   isLoading: boolean = false;
 
   @ViewChild(FormComponent) formComponent!: FormComponent;
-  @Input() user!: User;
+  @Output() dataEmitter = new EventEmitter<any>();
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private dataService: DataService) {}
 
   ngOnInit(): void {
     this.loadUsers();
@@ -42,23 +43,31 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  selectUserToEdit(userId: number): void {
+  sendData() {
+    this.dataService.setData(this.selectedUser);
+  }
+
+ async selectUserToEdit(userId: number): Promise<void> {
     this.userService.getUserById(userId).subscribe({
-      next: (userData) => {
+      next: async (userData) => {
         this.selectedUser = userData;
         this.isEditMode = true;
-        
-    
-        const modalElement = document.getElementById('userModal');
-        if (modalElement) {
-          const modal = new bootstrap.Modal(modalElement);
-          modal.show();
-        }
+        this.sendData()
+      
       },
       error: (err) => {
         console.error('Erro ao carregar o usuário para edição:', err);
       }
+
+
     });
+
+    const modalElement = document.getElementById('userModal');
+        if (modalElement) {
+          const modal = new bootstrap.Modal(modalElement);
+          await modal.show();
+        }
+
   }
 
   onFormSubmit(): void {
@@ -81,14 +90,6 @@ export class UserListComponent implements OnInit {
     }
   }
 
-  openModal(user: User): void {
-    this.selectedUser = { ...user }; // Evita alterar diretamente o objeto original.
-    const modalElement = document.getElementById('userModal');
-    if (modalElement) {
-      const modal = new bootstrap.Modal(modalElement);
-      modal.show();
-    }
-  }
 
   deleteUser(id: number): void {
     if (confirm('Você tem certeza que deseja excluir este usuário?')) {

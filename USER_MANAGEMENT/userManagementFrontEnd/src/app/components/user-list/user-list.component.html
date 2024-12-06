@@ -22,7 +22,7 @@
       <td>{{ user.dateOfBirth}}</td>
       <td>{{ user.education }}</td>
       <td style="display:flex; justify-content: flex-end">
-        <button class="btn btn-primary" (click)="openModal(user)">Editar Usuário</button>
+        <button class="btn btn-primary" (click)="selectUserToEdit(user.id)">Editar Usuário</button>
         <button (click)="deleteUser(user.id)" class="btn btn-danger btn-sm mx-2">Excluir</button>
       </td>
     </tr>

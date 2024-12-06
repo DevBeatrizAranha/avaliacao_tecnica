@@ -30,21 +30,21 @@ namespace UserManagementApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("DateOfBirth")
+                    b.Property<DateTime>("dateOfBirth")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Education")
+                    b.Property<string>("education")
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LastName")
+                    b.Property<string>("lastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

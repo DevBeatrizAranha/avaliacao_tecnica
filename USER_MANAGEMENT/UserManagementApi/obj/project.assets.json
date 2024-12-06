@@ -4780,8 +4780,8 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Beatriz\\projects\\avaliacao_tecnica\\USER_MANAGEMENT\\UserManagementApi\\UserManagementApi.csproj",
-      "projectName": "UserManagementApi",
+      "projectUniquename": "C:\\Users\\Beatriz\\projects\\avaliacao_tecnica\\USER_MANAGEMENT\\UserManagementApi\\UserManagementApi.csproj",
+      "projectname": "UserManagementApi",
       "projectPath": "C:\\Users\\Beatriz\\projects\\avaliacao_tecnica\\USER_MANAGEMENT\\UserManagementApi\\UserManagementApi.csproj",
       "packagesPath": "C:\\Users\\Beatriz\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Beatriz\\projects\\avaliacao_tecnica\\USER_MANAGEMENT\\UserManagementApi\\obj\\",

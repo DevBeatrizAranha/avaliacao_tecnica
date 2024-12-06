@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
 
@@ -17,12 +17,14 @@ interface User {
 })
 export class UserService {
 
+
   private apiUrl = `${environment.apiUrl}/Users`; 
 
   constructor(private http: HttpClient) { }
 
   getUsers(name?: string, dateOfBirth?: string, email?: string, education?: string): Observable<User[]> {
     let params = new HttpParams();
+    
 
     if (name) {
       params = params.set('name', name);
@@ -33,7 +35,7 @@ export class UserService {
     if (email) {
       params = params.set('email', email);
     }
-    if (education) {
+    if  (education) {
       params = params.set('education', education);
     }
 
@@ -46,5 +48,19 @@ export class UserService {
 
   addUser(user: any): Observable<any> {
     return this.http.post(this.apiUrl, user);
+  }
+
+  updateUser(id: number, user: User): Observable<void> {
+    const url = `${this.apiUrl}/Users/${id}`;
+    return this.http.put<void>(url, user, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  getUserById(id: number): Observable<User> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.get<User>(url);
   }
 }

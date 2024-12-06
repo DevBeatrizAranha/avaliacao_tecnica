@@ -15,17 +15,17 @@ namespace UserManagementApi.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Education = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    lastname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    dateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    education = table.Column<string>(type: "nvarchar(50)", nullable: false),
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.id);
                 });
         }
 

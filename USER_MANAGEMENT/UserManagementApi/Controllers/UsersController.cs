@@ -29,25 +29,25 @@ namespace UserApi.Controllers
             // Filtrar por nome
             if (!string.IsNullOrEmpty(name))
             {
-                query = query.Where(u => u.Name.Contains(name));
+                query = query.Where(u => u.name.Contains(name));
             }
 
             // Filtrar por data de nascimento
             if (dateOfBirth.HasValue)
             {
-                query = query.Where(u => u.DateOfBirth.Date == dateOfBirth.Value.Date);
+                query = query.Where(u => u.dateOfBirth.Date == dateOfBirth.Value.Date);
             }
 
             // Filtrar por email
             if (!string.IsNullOrEmpty(email))
             {
-                query = query.Where(u => u.Email.Contains(email));
+                query = query.Where(u => u.email.Contains(email));
             }
 
             // Filtrar por escolaridade
             if (!string.IsNullOrEmpty(education))
             {
-                query = query.Where(u => u.Education.Contains(education));
+                query = query.Where(u => u.education.Contains(education));
             }
 
             // Obter os resultados
@@ -77,14 +77,14 @@ namespace UserApi.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
+            return CreatedAtAction(nameof(GetUser), new { id = user.id }, user);
         }
 
         // PUT: api/Users/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
-            if (id != user.Id)
+            if (id != user.id)
             {
                 return BadRequest();
             }

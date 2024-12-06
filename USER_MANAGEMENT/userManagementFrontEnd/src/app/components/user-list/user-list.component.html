@@ -7,7 +7,7 @@
       <th>ID</th>
       <th>Nome</th>
       <th>Sobrenome</th>
-      <th>Email</th>
+      <th>email</th>
       <th>Data de Nascimento</th>
       <th>Escolaridade</th>
       <th></th>
@@ -22,9 +22,24 @@
       <td>{{ user.dateOfBirth}}</td>
       <td>{{ user.education }}</td>
       <td style="display:flex; justify-content: flex-end">
-        <button (click)="editUser(user)" class="btn btn-primary btn-sm mx-2">Editar</button>
+        <button (click)="selectUserToEdit(user.id)" class="btn btn-primary btn-sm mx-2">Editar</button>
         <button (click)="deleteUser(user.id)" class="btn btn-danger btn-sm mx-2">Excluir</button>
       </td>
     </tr>
   </tbody>
 </table> 
+
+<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="userModalLabel">{{ isEditMode ? 'Editar Usuário' : 'Adicionar Usuário' }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Formulário de Adicionar/Editar -->
+        <app-form (submit)="onFormSubmit()"></app-form>
+      </div>
+    </div>
+  </div>
+</div>

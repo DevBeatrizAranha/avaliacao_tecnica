@@ -1,2 +1,30 @@
-<app-form></app-form>
-<app-user-list></app-user-list>
+<div class="row">
+  <div class="col-3">
+    
+  </div>
+  <div class="col-3">
+    <button class="btn btn-primary" (click)="openModal()"> Novo </button>
+  </div>
+  
+</div>
+
+<div class="row">
+  <div class="col mx-5">
+    <app-user-list></app-user-list>
+  </div>
+</div>
+
+
+<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="userModalLabel">Novo Usuário</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-form></app-form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -4,7 +4,7 @@ import { User } from '../../models/user.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; 
 import { DataService } from '../../services/component.service';
-import * as bootstrap from 'bootstrap';
+
 
 @Component({
   selector: 'app-form',
@@ -27,6 +27,7 @@ export class FormComponent {
   @Output() userAdded = new EventEmitter<User>();
   sharedData: any;
   receivedData: any;
+
 
   constructor(private userService: UserService, private dataService: DataService) {}
 

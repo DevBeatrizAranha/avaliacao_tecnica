@@ -17,10 +17,43 @@ namespace UserApi.Controllers
         }
 
         // GET: api/Users
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+          [HttpGet]
+        public async Task<IActionResult> GetUsers(
+            [FromQuery] string name = null,
+            [FromQuery] DateTime? dateOfBirth = null,
+            [FromQuery] string email = null,
+            [FromQuery] string education = null)
         {
-            return await _context.Users.ToListAsync();
+            var query = _context.Users.AsQueryable();
+
+            // Filtrar por nome
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(u => u.Name.Contains(name));
+            }
+
+            // Filtrar por data de nascimento
+            if (dateOfBirth.HasValue)
+            {
+                query = query.Where(u => u.DateOfBirth.Date == dateOfBirth.Value.Date);
+            }
+
+            // Filtrar por email
+            if (!string.IsNullOrEmpty(email))
+            {
+                query = query.Where(u => u.Email.Contains(email));
+            }
+
+            // Filtrar por escolaridade
+            if (!string.IsNullOrEmpty(education))
+            {
+                query = query.Where(u => u.Education.Contains(education));
+            }
+
+            // Obter os resultados
+            var users = await query.ToListAsync();
+            
+            return Ok(users);
         }
 
         // GET: api/Users/5

@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http'; 
+import { provideHttpClient } from '@angular/common/http'; 
 
 
-import { UserService } from '../services/services/user.service';
+import { UserService } from './services/user.service';
 
 
 import { CommonModule } from '@angular/common';  
@@ -14,14 +14,14 @@ import { CommonModule } from '@angular/common';
     AppComponent
   ],
   imports: [
-    BrowserModule,
-    HttpClientModule,
-   
+    BrowserModule,   
     UserService,
-    CommonModule
+    CommonModule,
+    
    
   ],
-  providers: [],
+  providers: [ 
+    provideHttpClient()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

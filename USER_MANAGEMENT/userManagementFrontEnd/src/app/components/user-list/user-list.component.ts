@@ -24,23 +24,23 @@ export class UserListComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    // this.loadUsers();
+    this.loadUsers();
   }
 
-  // loadUsers(name?: string, dateOfBirth?: string, email?: string, education?: string): void {
-  //   this.isLoading = true;
-  //   this.errorMessage = '';
+  loadUsers(name?: string, dateOfBirth?: string, email?: string, education?: string): void {
+    this.isLoading = true;
+    this.errorMessage = '';
 
-  //   this.userService.getUsers(name, dateOfBirth, email, education).subscribe({
-  //     next: (data) => {
-  //       this.users = data;
-  //       this.isLoading = false;
-  //     },
-  //     error: (err) => {
-  //       this.errorMessage = 'Erro ao carregar usuários';
-  //       console.error(err);
-  //       this.isLoading = false;
-  //     }
-  //   });
-  // }
+    this.userService.getUsers(name, dateOfBirth, email, education).subscribe({
+      next: (data) => {
+        this.users = data;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.errorMessage = 'Erro ao carregar usuários';
+        console.error(err);
+        this.isLoading = false;
+      }
+    });
+  }
 }

@@ -3,7 +3,7 @@ import { UserService } from '../../services/user.service';
 import { User } from '../../models/user.model';
 import { FormComponent } from '../form/form.component';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
 import { DataService } from '../../services/component.service';
 import * as bootstrap from 'bootstrap';
 
@@ -15,7 +15,7 @@ import * as bootstrap from 'bootstrap';
 })
 export class UserListComponent implements OnInit {
   users: User[] = [];
-  selectedUser: User | null = null; 
+  selectedUser: User | null = null;
   isEditMode: boolean = false;
   errorMessage: string | null = null;
   isLoading: boolean = false;
@@ -24,9 +24,9 @@ export class UserListComponent implements OnInit {
   @Output() dataEmitter = new EventEmitter<any>();
   searchTerm: any;
   usersFiltered!: User[];
-  
 
-  constructor(private userService: UserService, private dataService: DataService) {}
+
+  constructor(private userService: UserService, private dataService: DataService) { }
 
   ngOnInit(): void {
     this.loadUsers();
@@ -37,7 +37,7 @@ export class UserListComponent implements OnInit {
     this.userService.getUsers().subscribe({
       next: (users) => {
         this.users = users;
-        this.usersFiltered = users; 
+        this.usersFiltered = users;
         this.users = this.usersFiltered;
         this.isLoading = false;
       },
@@ -50,7 +50,7 @@ export class UserListComponent implements OnInit {
 
   searchUsers(): void {
     if (this.searchTerm.trim() === '') {
-      this.usersFiltered = this.users;  
+      this.usersFiltered = this.users;
       return;
     }
 
@@ -72,27 +72,22 @@ export class UserListComponent implements OnInit {
     this.dataService.setData(this.selectedUser);
   }
 
- async selectUserToEdit(userId: number): Promise<void> {
+  async selectUserToEdit(userId: number): Promise<void> {
     this.userService.getUserById(userId).subscribe({
       next: async (userData) => {
         this.selectedUser = userData;
         this.isEditMode = true;
         this.sendData()
-      
+
       },
       error: (err) => {
-        console.error('Erro ao carregar o usuário para edição:', err);
         alert('Erro ao carregar o usuário para edição');
       }
 
 
     });
 
-    const modalElement = document.getElementById('userModal');
-        if (modalElement) {
-          const modal = new bootstrap.Modal(modalElement);
-          await modal.show();
-        }
+    this.openModal('userModal')
 
   }
 
@@ -100,21 +95,17 @@ export class UserListComponent implements OnInit {
     if (this.selectedUser) {
       this.userService.updateUser(this.selectedUser.id, this.selectedUser).subscribe({
         next: () => {
-          console.log('Usuário atualizado com sucesso!2');
-          this.loadUsers(); 
-          const modalElement = document.getElementById('userModal');
-          if (modalElement) {
-            const modal = new bootstrap.Modal(modalElement);
-            modal.hide();
-          }
+          this.loadUsers();
         },
         error: (err) => {
-          console.error('Erro ao atualizar o usuário:', err);
           alert('Erro ao atualizar o usuário');
         }
       });
     }
-     
+    this.closeModal('userModal');
+    this.loadUsers();
+
+
   }
 
 
@@ -126,10 +117,34 @@ export class UserListComponent implements OnInit {
           this.loadUsers();
         },
         error: (err) => {
-          console.error('Erro ao excluir o usuário:', err);
           alert('Erro ao excluir o usuário');
         }
       });
     }
   }
+
+  openModal(modalId: string): void {
+    const modalElement = document.getElementById(modalId);
+    if (modalElement) {
+      const modal = new bootstrap.Modal(modalElement);
+      modal.show();
+    } else {
+      console.error(`Modal '${modalId}' não encontrado.`);
+    }
+  }
+
+  closeModal(modalId: string): void {
+    const modalElement = document.getElementById(modalId);
+    if (modalElement) {
+      const modal = bootstrap.Modal.getInstance(modalElement);
+      if (modal) {
+        modal.hide();
+      } else {
+        console.error(`Nenhuma instância do modal encontrada para '${modalId}'.`);
+      }
+    } else {
+      console.error(`Modal '${modalId}' não encontrado.`);
+    }
+  }
+  
 }

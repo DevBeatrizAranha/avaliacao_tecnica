@@ -82,12 +82,14 @@ export class FormComponent {
     this.dataService.data$.subscribe((receivedData) => {
       if (receivedData) {
         this.user = receivedData;
-        this.userForm.patchValue(receivedData); // Preenche o formulário com os dados
+        this.userForm.patchValue(receivedData);
       }
     });
   }
 
+
   onSubmit() {
     this.saveUser();
+    this.userForm.reset(); 
   }
 }
